@@ -58,6 +58,16 @@ emission_sphere_radius = 16.0
 gravity = Vector2(0, -980)
 color = Color(1, 0.721569, 0.219608, 1)
 
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(16, 32)
+emitting = false
+lifetime = 0.15
+explosiveness = 0.5
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 16.0
+color = Color(1, 0.721569, 0.219608, 1)
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 16)
 target_position = Vector2(-1, 0)
