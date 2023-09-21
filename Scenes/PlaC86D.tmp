@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://boyq21qdyfnda"]
+
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_ndptr"]
+[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_ofwwl"]
+[ext_resource type="Script" path="res://Scenes/Camera Anchor.gd" id="3_quieo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_ofwwl")
+jumps = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.992157, 0.619608, 0, 1)
+position = Vector2(16, 16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_ndptr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 16)
+scale = Vector2(1.6, 1.6)
+shape = SubResource("CircleShape2D_psfy8")
+
+[node name="Camera Anchor" type="Node2D" parent="."]
+script = ExtResource("3_quieo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera Anchor"]
+position = Vector2(16, 16)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_ndptr")
+
+[node name="Camera2D" type="Camera2D" parent="Camera Anchor"]
+offset = Vector2(16, 16)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(16, 32)
+emitting = false
+lifetime = 0.15
+one_shot = true
+explosiveness = 0.5
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 16.0
+color = Color(1, 0.721569, 0.219608, 1)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(16, 0)
+emitting = false
+lifetime = 0.15
+explosiveness = 0.5
+randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 16.0
+gravity = Vector2(0, -980)
+color = Color(1, 0.721569, 0.219608, 1)
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, 16)
+target_position = Vector2(-1, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(32, 16)
+target_position = Vector2(1, 0)
