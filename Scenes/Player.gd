@@ -23,7 +23,7 @@ var wall_jump = wall_jumps
 
 # executes every physics step
 func _physics_process(delta):
-	
+	print(jump)
 	# Stuff to do when on the floor/landing
 	if is_on_floor():
 		if !on_ground:
@@ -61,7 +61,7 @@ func jumping(delta):
 	
 	# Jump
 	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up"):
-		if is_on_floor() or jump > 0 and !is_wall_sliding:
+		if is_on_floor() and jump > 0 or jump > 0 and !is_wall_sliding:
 			jump -= 1
 			velocity.y = JUMP_VELOCITY
 			# Particle Emitter

@@ -17,11 +17,13 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ndptr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(16, 16)
 scale = Vector2(1.6, 1.6)
 shape = SubResource("CircleShape2D_psfy8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 offset = Vector2(16, 16)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
