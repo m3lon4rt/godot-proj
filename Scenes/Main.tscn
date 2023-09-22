@@ -267,4 +267,6 @@ position = Vector2(1152, 0)
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_4ayb7")]
 position = Vector2(608, 160)
-wall_jumps = 2
+jumps = 10
+wall_jumps = 10
+fuel = 400

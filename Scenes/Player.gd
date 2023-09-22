@@ -1,7 +1,8 @@
 extends CharacterBody2D
 
 # Constants
-const SPEED = 300.0
+const SPEED = 75
+const MAX_SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -16,25 +17,42 @@ var flight_on = false
 # Exported variables can be assigned values from the Inspector >>>
 @export var jumps = 0 # num of jumps allowed
 @export var wall_jumps = 0 # num of wall jumps allowed
+@export var fuel = 0 # 1 - 100 should be fine
 @export var screen_shake = 1*0.15
 
-# Jump counters
-var jump = jumps
-var wall_jump = wall_jumps
+# Jump and Fuel counters
+var jump
+var wall_jump
+var fuel_count
+
+# Executes at start
+func _ready():
+	# Initialize counters
+	jump = jumps
+	wall_jump = wall_jumps
+	fuel_count = fuel
 
 # executes every physics step
 func _physics_process(delta):
-	print(flight_on)
+	# Debug messages
+	print("fuel: %d" % fuel_count)
+	
 	# Stuff to do when on the floor/landing
 	if is_on_floor():
+		# Screenshake when landing
 		if !on_ground:
-			# Screenshake
 			get_node("Camera2D").trauma = screen_shake
 		
+		# to check if player just landed
 		on_ground = true
-		#reset jump counters
+		
+		# Reset jump acounters
 		jump = jumps
 		wall_jump = wall_jumps
+		
+		# Replenish fuel
+		if fuel_count < fuel:
+			fuel_count += 2
 	else:
 		on_ground = false
 	
@@ -47,41 +65,67 @@ func _physics_process(delta):
 	# Handles Jump.
 	jumping(delta)
 	
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle the movement.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction = Input.get_axis("ui_left", "ui_right")
 	if direction:
-		velocity.x = direction * SPEED
+		velocity.x += direction * SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x += 0
+	
+	# Slow down horizontal movement (friction)
+	if velocity.x > 10:
+		velocity.x -= 20
+	elif velocity.x < -10:
+		velocity.x += 20
+	else:
+		velocity.x = 0
+	
+	# Limit speed of horizontal flight
+	if velocity.x < -MAX_SPEED:
+		velocity.x = -MAX_SPEED
+	elif velocity.x > MAX_SPEED:
+		velocity.x = MAX_SPEED
 	
 	#physics
 	move_and_slide()
 
 # Function that handles flying
 func flying(delta):
-	if Input.is_action_pressed("activate_flight"):
+	if Input.is_action_pressed("activate_flight") and fuel_count > 0:
 		flight_on = true
-		wall_gravity = 0
-		gravity = 0
+		# Consume Fuel
+		fuel_count -= 1 
 		
-		velocity.x = 0
-		velocity.y = 0
+		# Slow down previous vertical movement (friction)
+		if velocity.y > 10:
+			velocity.y -= 20
+		elif velocity.y < -10:
+			velocity.y += 0
+		else:
+			velocity.y = 0
+			
+		# Limit speed of vertical flight
+		if velocity.y < -MAX_SPEED:
+			velocity.y = -MAX_SPEED
+		elif velocity.y > MAX_SPEED - 100: # Slower speed when flying down so it feels natural
+			velocity.y = MAX_SPEED - 100
 	
-	if Input.is_action_just_released("activate_flight"):
+	if Input.is_action_just_released("activate_flight") or fuel_count == 0:
 		flight_on = false
-		gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-		wall_gravity = ProjectSettings.get_setting("physics/2d/default_gravity")*0.20
 	
 	if flight_on:
 		var vert_dir = Input.get_axis("ui_up","ui_down")
+		# Get the input direction and handle the movement.
 		if vert_dir:
-			velocity.y = vert_dir * SPEED
+			velocity.y += vert_dir * SPEED/4
 		else:
-			velocity.y = move_toward(velocity.y, 0, SPEED)
-			
+			velocity.y += 0
+		
+		# Particle emitter on
 		get_node("CPUParticles2D3").emitting = true
 	else:
+		# Particle emitter off
 		get_node("CPUParticles2D3").emitting = false
 
 # Function that handles jumping
@@ -91,7 +135,7 @@ func jumping(delta):
 	
 	# Jump
 	if Input.is_action_just_pressed("ui_accept") or Input.is_action_just_pressed("ui_up"):
-		if is_on_floor() and jump > 0 or jump > 0 and !is_wall_sliding:
+		if is_on_floor() and jump > 0 or jump > 0:
 			if !flight_on:
 				jump -= 1
 				velocity.y = JUMP_VELOCITY
@@ -110,7 +154,7 @@ func wall_jumping(delta):
 		# Screenshake and Particle Emitter
 		get_node("Camera2D").trauma = screen_shake
 		get_node("CPUParticles2D").emitting = true
-	if is_wall_sliding and Input.is_action_pressed("ui_left") and wall_jump > 0 and !get_node("RayCast2D").is_colliding():
+	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCast2D").is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle emitter		
@@ -131,6 +175,10 @@ func wall_slide(delta):
 	if is_wall_sliding:
 		velocity.y += wall_gravity * delta
 		velocity.y = min(velocity.y, wall_gravity)
+		
+		# Replenish fuel
+		if fuel_count < fuel:
+			fuel_count += 1
 		
 		# Particle emitter on
 		get_node("CPUParticles2D2").emitting = true
