@@ -36,6 +36,7 @@ func _ready():
 func _physics_process(delta):
 	# Debug messages
 	print("fuel: %d" % fuel_count)
+	get_node("Label").text = str(fuel_count)
 	
 	# Stuff to do when on the floor/landing
 	if is_on_floor():
@@ -52,7 +53,7 @@ func _physics_process(delta):
 		
 		# Replenish fuel
 		if fuel_count < fuel:
-			fuel_count += 2
+			fuel_count += 1
 	else:
 		on_ground = false
 	
@@ -118,7 +119,7 @@ func flying(delta):
 		var vert_dir = Input.get_axis("ui_up","ui_down")
 		# Get the input direction and handle the movement.
 		if vert_dir:
-			velocity.y += vert_dir * SPEED/4
+			velocity.y += vert_dir * SPEED
 		else:
 			velocity.y += 0
 		
