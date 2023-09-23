@@ -37,6 +37,7 @@ func _physics_process(delta):
 	ray_cast_2d.target_position = target.global_position - ray_cast_2d.global_position + Vector2(16,16)
 	# added the last bit to compensate for the player's origin being at its upper left
 	
+	# obtain player position relative to walker and move walker towards player
 	var player_direction = ray_cast_2d.target_position.x
 	if player_direction > 0:
 		velocity.x += ACCELERATION
@@ -45,6 +46,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = 0
 		
+	# limit horizontal speed
 	if velocity.x < -MAX_SPEED:
 		velocity.x = -MAX_SPEED
 	elif velocity.x > MAX_SPEED:
