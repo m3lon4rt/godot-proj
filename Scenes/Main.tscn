@@ -272,5 +272,6 @@ jumps = 10
 wall_jumps = 10
 fuel = 400
 
-[node name="Node2D" parent="." instance=ExtResource("3_sv5ha")]
+[node name="Node2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
 position = Vector2(1056, 448)
+target = NodePath("../CharacterBody2D")
