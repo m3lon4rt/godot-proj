@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://btopkj2t82iuc"]
+
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_3whie"]
+[ext_resource type="Script" path="res://Scenes/Walker_mob.gd" id="1_deteq"]
+[ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_eibac"]
+[ext_resource type="Script" path="res://Scenes/WalkerStillState.gd" id="4_npkv2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7nlq"]
+
+[node name="Node2D" type="CharacterBody2D"]
+script = ExtResource("1_deteq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.458824, 0.470588, 1)
+position = Vector2(16, 16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_3whie")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(16, 16)
+scale = Vector2(1.6, 1.6)
+shape = SubResource("RectangleShape2D_d7nlq")
+
+[node name="WalkerFiniteState" type="Node" parent="." node_paths=PackedStringArray("state")]
+script = ExtResource("2_eibac")
+state = NodePath("WalkerStillState")
+
+[node name="WalkerStillState" type="Node" parent="WalkerFiniteState"]
+script = ExtResource("4_npkv2")
+
+[node name="PhysicHP" type="Label" parent="."]
+modulate = Color(1, 0, 0.0156863, 1)
+offset_top = -38.0
+offset_right = 33.0
+offset_bottom = -12.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MagicHP" type="Label" parent="."]
+modulate = Color(0.858824, 0, 0.87451, 1)
+offset_top = -22.0
+offset_right = 33.0
+offset_bottom = 4.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(0, 16)
