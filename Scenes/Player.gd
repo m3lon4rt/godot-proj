@@ -36,7 +36,7 @@ func _ready():
 # executes every physics step
 func _physics_process(delta):
 	# Debug messages
-	print("fuel: %d" % fuel_count)
+	# print("fuel: %d" % fuel_count)
 	get_node("Label").text = str(fuel_count)
 	
 	# Stuff to do when on the floor/landing
