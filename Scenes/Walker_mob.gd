@@ -32,6 +32,6 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	ray_cast_2d.target_position = get_local_mouse_position()
+	ray_cast_2d.target_position = Player.global_position
 	
 	move_and_slide()
