@@ -92,7 +92,7 @@ func _physics_process(delta):
 	move_and_slide()
 
 # Function that handles flying
-func flying(delta):
+func flying(_delta):
 	if Input.is_action_pressed("activate_flight") and fuel_count > 0:
 		flight_on = true
 		# Consume Fuel

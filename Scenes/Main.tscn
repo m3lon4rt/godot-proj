@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm4d07dgoq33x"]
+[gd_scene load_steps=4 format=3 uid="uid://bm4d07dgoq33x"]
 
 [ext_resource type="PackedScene" uid="uid://b0obpdqm8orxy" path="res://Scenes/Box.tscn" id="1_506sy"]
 [ext_resource type="PackedScene" uid="uid://boyq21qdyfnda" path="res://Scenes/Player.tscn" id="2_4ayb7"]
+[ext_resource type="PackedScene" uid="uid://btopkj2t82iuc" path="res://Scenes/Walker_mob.tscn" id="3_sv5ha"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -270,3 +271,6 @@ position = Vector2(608, 160)
 jumps = 10
 wall_jumps = 10
 fuel = 400
+
+[node name="Node2D" parent="." instance=ExtResource("3_sv5ha")]
+position = Vector2(1056, 448)
