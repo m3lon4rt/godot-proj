@@ -6,7 +6,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ofwwl")
 jumps = 3
 
@@ -17,13 +17,18 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ndptr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(16, 16)
 scale = Vector2(1.6, 1.6)
 shape = SubResource("CircleShape2D_psfy8")
 
+[node name="Label" type="Label" parent="."]
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = -9.0
+text = "0"
+horizontal_alignment = 1
+
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
 offset = Vector2(16, 16)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
@@ -36,7 +41,19 @@ position = Vector2(16, 16)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_ndptr")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="Left_Collision" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, 16)
+target_position = Vector2(-1, 0)
+
+[node name="Right_Collision" type="RayCast2D" parent="RayCasts"]
+position = Vector2(32, 16)
+target_position = Vector2(1, 0)
+
+[node name="Emitters" type="Node2D" parent="."]
+
+[node name="Jump_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 32)
 emitting = false
 lifetime = 0.15
@@ -47,7 +64,7 @@ emission_shape = 1
 emission_sphere_radius = 16.0
 color = Color(1, 0.721569, 0.219608, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+[node name="Wall_Slide_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 0)
 emitting = false
 lifetime = 0.15
@@ -58,7 +75,7 @@ emission_sphere_radius = 16.0
 gravity = Vector2(0, -980)
 color = Color(1, 0.721569, 0.219608, 1)
 
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+[node name="Flight_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 32)
 emitting = false
 lifetime = 0.15
@@ -67,18 +84,3 @@ randomness = 0.5
 emission_shape = 1
 emission_sphere_radius = 16.0
 color = Color(1, 0.721569, 0.219608, 1)
-
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, 16)
-target_position = Vector2(-1, 0)
-
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2(32, 16)
-target_position = Vector2(1, 0)
-
-[node name="Label" type="Label" parent="."]
-offset_top = -32.0
-offset_right = 32.0
-offset_bottom = -9.0
-text = "0"
-horizontal_alignment = 1

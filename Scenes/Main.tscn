@@ -266,12 +266,16 @@ position = Vector2(1152, 32)
 [node name="Node2D86" parent="Boxes" instance=ExtResource("1_506sy")]
 position = Vector2(1152, 0)
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_4ayb7")]
+[node name="Player" parent="." instance=ExtResource("2_4ayb7")]
 position = Vector2(608, 160)
 jumps = 10
 wall_jumps = 10
 fuel = 400
 
 [node name="Node2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
-position = Vector2(635, 233)
-target = NodePath("../CharacterBody2D")
+position = Vector2(672, 224)
+target = NodePath("../Player")
+
+[node name="Node2D2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
+position = Vector2(480, 352)
+target = NodePath("../Player")
