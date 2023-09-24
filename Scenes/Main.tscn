@@ -6,266 +6,6 @@
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Boxes" type="Node" parent="."]
-
-[node name="Node2D" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(160, 512)
-
-[node name="Node2D2" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(160, 480)
-
-[node name="Node2D3" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(160, 448)
-
-[node name="Node2D4" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(160, 416)
-
-[node name="Node2D5" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(192, 544)
-
-[node name="Node2D6" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(224, 544)
-
-[node name="Node2D7" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(256, 544)
-
-[node name="Node2D8" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(288, 544)
-
-[node name="Node2D9" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(320, 544)
-
-[node name="Node2D10" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(352, 544)
-
-[node name="Node2D11" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(384, 544)
-
-[node name="Node2D12" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(416, 544)
-
-[node name="Node2D13" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(448, 512)
-
-[node name="Node2D14" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(448, 480)
-
-[node name="Node2D15" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(448, 448)
-
-[node name="Node2D16" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(448, 416)
-
-[node name="Node2D17" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(160, 544)
-
-[node name="Node2D18" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(448, 544)
-
-[node name="Node2D19" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(128, 416)
-
-[node name="Node2D20" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(96, 416)
-
-[node name="Node2D21" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(480, 416)
-
-[node name="Node2D22" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(512, 416)
-
-[node name="Node2D23" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(544, 416)
-
-[node name="Node2D24" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(96, 384)
-
-[node name="Node2D25" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(96, 352)
-
-[node name="Node2D26" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(576, 416)
-
-[node name="Node2D27" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(576, 384)
-
-[node name="Node2D28" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(576, 352)
-
-[node name="Node2D29" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(64, 352)
-
-[node name="Node2D30" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(32, 352)
-
-[node name="Node2D31" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(0, 352)
-
-[node name="Node2D32" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 320)
-
-[node name="Node2D33" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 288)
-
-[node name="Node2D34" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 256)
-
-[node name="Node2D35" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 224)
-
-[node name="Node2D36" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 192)
-
-[node name="Node2D37" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 352)
-
-[node name="Node2D38" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(576, 320)
-
-[node name="Node2D39" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(576, 288)
-
-[node name="Node2D40" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(608, 288)
-
-[node name="Node2D41" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(640, 288)
-
-[node name="Node2D42" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(672, 288)
-
-[node name="Node2D43" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(672, 320)
-
-[node name="Node2D44" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(672, 352)
-
-[node name="Node2D45" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(672, 384)
-
-[node name="Node2D46" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(672, 416)
-
-[node name="Node2D47" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(704, 416)
-
-[node name="Node2D48" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(736, 416)
-
-[node name="Node2D49" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(768, 416)
-
-[node name="Node2D50" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(800, 416)
-
-[node name="Node2D51" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(832, 416)
-
-[node name="Node2D52" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(832, 448)
-
-[node name="Node2D53" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(864, 480)
-
-[node name="Node2D54" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(864, 448)
-
-[node name="Node2D55" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(896, 480)
-
-[node name="Node2D56" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(896, 512)
-
-[node name="Node2D57" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(928, 512)
-
-[node name="Node2D58" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(960, 512)
-
-[node name="Node2D59" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(992, 512)
-
-[node name="Node2D60" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1024, 512)
-
-[node name="Node2D61" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1056, 512)
-
-[node name="Node2D62" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1088, 512)
-
-[node name="Node2D63" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1120, 512)
-
-[node name="Node2D64" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 480)
-
-[node name="Node2D65" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 448)
-
-[node name="Node2D66" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 416)
-
-[node name="Node2D67" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 384)
-
-[node name="Node2D68" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 352)
-
-[node name="Node2D69" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 320)
-
-[node name="Node2D70" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 288)
-
-[node name="Node2D71" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 256)
-
-[node name="Node2D72" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 224)
-
-[node name="Node2D73" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 192)
-
-[node name="Node2D74" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 512)
-
-[node name="Node2D75" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 160)
-
-[node name="Node2D76" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 128)
-
-[node name="Node2D77" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 96)
-
-[node name="Node2D78" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 64)
-
-[node name="Node2D79" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 160)
-
-[node name="Node2D80" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 128)
-
-[node name="Node2D81" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 96)
-
-[node name="Node2D82" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 64)
-
-[node name="Node2D83" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 32)
-
-[node name="Node2D84" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(-32, 0)
-
-[node name="Node2D85" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 32)
-
-[node name="Node2D86" parent="Boxes" instance=ExtResource("1_506sy")]
-position = Vector2(1152, 0)
-
 [node name="Player" parent="." instance=ExtResource("2_4ayb7")]
 position = Vector2(608, 160)
 jumps = 10
@@ -279,3 +19,60 @@ target = NodePath("../Player")
 [node name="Node2D2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
 position = Vector2(480, 352)
 target = NodePath("../Player")
+
+[node name="Level" type="Node" parent="."]
+
+[node name="Node2D" parent="Level" instance=ExtResource("1_506sy")]
+scale = Vector2(1, 20)
+
+[node name="Node2D2" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(1760, 0)
+scale = Vector2(1, 20)
+
+[node name="Node2D3" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(32, 416)
+scale = Vector2(7, 7)
+
+[node name="Node2D4" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(256, 512)
+scale = Vector2(47, 4)
+
+[node name="Node2D5" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(480, 384)
+scale = Vector2(9, 4)
+
+[node name="Node2D6" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(768, 416)
+scale = Vector2(1, 3)
+
+[node name="Node2D7" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(800, 448)
+scale = Vector2(2, 1)
+
+[node name="Node2D8" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(800, 480)
+scale = Vector2(4, 1)
+
+[node name="Node2D9" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(32, 320)
+scale = Vector2(4, 3)
+
+[node name="Node2D10" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(576, 256)
+scale = Vector2(4, 4)
+
+[node name="Node2D11" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(224, 64)
+scale = Vector2(7, 4)
+
+[node name="Node2D12" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(1216, 448)
+scale = Vector2(17, 2)
+
+[node name="Node2D13" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(1536, 352)
+scale = Vector2(7, 3.1)
+
+[node name="Node2D14" parent="Level" instance=ExtResource("1_506sy")]
+position = Vector2(1088, 32)
+scale = Vector2(3, 8)

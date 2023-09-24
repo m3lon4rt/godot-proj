@@ -37,7 +37,7 @@ func _ready():
 func _physics_process(delta):
 	# Debug messages
 	# print("fuel: %d" % fuel_count)
-	get_node("Label").text = str(fuel_count)
+	get_node("Label").text = str(get_node("Basic_Atk").hits)
 	
 	# Stuff to do when on the floor/landing
 	if is_on_floor():

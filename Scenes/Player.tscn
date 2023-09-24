@@ -8,6 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_ofwwl")
 jumps = 3
 
@@ -92,5 +93,3 @@ offset_right = 32.0
 offset_bottom = -6.0
 text = "0"
 horizontal_alignment = 1
-
-[connection signal="body_entered" from="Basic_Atk" to="Basic_Atk" method="_on_body_entered"]
