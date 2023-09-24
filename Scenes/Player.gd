@@ -37,7 +37,7 @@ func _ready():
 func _physics_process(delta):
 	# Debug messages
 	# print("fuel: %d" % fuel_count)
-	get_node("Label").text = str(fuel_count)
+	get_node("Label").text = str(get_node("Basic_Atk").hits)
 	
 	# Stuff to do when on the floor/landing
 	if is_on_floor():
@@ -125,10 +125,10 @@ func flying(_delta):
 			velocity.y += 0
 		
 		# Particle emitter on
-		get_node("CPUParticles2D3").emitting = true
+		get_node("Emitters/Flight_Emitter").emitting = true
 	else:
 		# Particle emitter off
-		get_node("CPUParticles2D3").emitting = false
+		get_node("Emitters/Flight_Emitter").emitting = false
 
 # Function that handles jumping
 func jumping(delta):
@@ -142,7 +142,7 @@ func jumping(delta):
 				jump -= 1
 				velocity.y = JUMP_VELOCITY
 				# Particle Emitter
-				get_node("CPUParticles2D").emitting = true
+				get_node("Emitters/Jump_Emitter").emitting = true
 
 # Function that handles wall jumping
 func wall_jumping(delta):
@@ -150,18 +150,18 @@ func wall_jumping(delta):
 	wall_slide(delta)
 	
 	# Checks which direction the wall is and if you're wall sliding then does a wall jump if you move in the opposite direction
-	if is_wall_sliding and Input.is_action_just_pressed("ui_right") and wall_jump > 0 and !get_node("RayCast2D2").is_colliding():
+	if is_wall_sliding and Input.is_action_just_pressed("ui_right") and wall_jump > 0 and !get_node("RayCasts/Right_Collision").is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle Emitter
 		get_node("Camera2D").trauma = screen_shake
-		get_node("CPUParticles2D").emitting = true
-	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCast2D").is_colliding():
+		get_node("Emitters/Jump_Emitter").emitting = true
+	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCasts/Left_Collision").is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle emitter		
 		get_node("Camera2D").trauma = screen_shake
-		get_node("CPUParticles2D").emitting = true
+		get_node("Emitters/Jump_Emitter").emitting = true
 
 # Function that handles wall sliding
 func wall_slide(delta):
@@ -183,14 +183,14 @@ func wall_slide(delta):
 			fuel_count += 1
 		
 		# Particle emitter on
-		get_node("CPUParticles2D2").emitting = true
+		get_node("Emitters/Wall_Slide_Emitter").emitting = true
 	else:
 		# Particle emitter off
-		get_node("CPUParticles2D2").emitting = false
+		get_node("Emitters/Wall_Slide_Emitter").emitting = false
 
 # Custom wall checking function bec "is_on_wall()" doesn't work in this use case
 func wall_check():
-	if get_node("RayCast2D").is_colliding() or get_node("RayCast2D2").is_colliding():
+	if get_node("RayCasts/Left_Collision").is_colliding() or get_node("RayCasts/Right_Collision").is_colliding():
 		on_wall = true
 	else:
 		on_wall = false

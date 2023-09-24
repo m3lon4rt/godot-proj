@@ -1,12 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://boyq21qdyfnda"]
+[gd_scene load_steps=6 format=3 uid="uid://boyq21qdyfnda"]
 
 [ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_ndptr"]
 [ext_resource type="Script" path="res://Scenes/Player.gd" id="1_ofwwl"]
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="3_dwfug"]
+[ext_resource type="Script" path="res://Scenes/Basic_Atk.gd" id="3_tc05a"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_ofwwl")
 jumps = 3
 
@@ -17,14 +19,20 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_ndptr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(16, 16)
 scale = Vector2(1.6, 1.6)
 shape = SubResource("CircleShape2D_psfy8")
 
+[node name="Basic_Atk" type="Area2D" parent="."]
+position = Vector2(16, 16)
+script = ExtResource("3_tc05a")
+
+[node name="Basic_Atk_Hitbox" type="CollisionPolygon2D" parent="Basic_Atk"]
+polygon = PackedVector2Array(32, 0, 48, -16, 64, -32, 80, -48, 96, -40, 112, -24, 120, 0, 112, 24, 96, 40, 80, 48, 64, 32, 48, 16)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
-offset = Vector2(16, 16)
+position = Vector2(16, 16)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -32,11 +40,22 @@ drag_vertical_enabled = true
 script = ExtResource("3_dwfug")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
-position = Vector2(16, 16)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("1_ndptr")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="RayCasts" type="Node2D" parent="."]
+
+[node name="Left_Collision" type="RayCast2D" parent="RayCasts"]
+position = Vector2(0, 16)
+target_position = Vector2(-1, 0)
+
+[node name="Right_Collision" type="RayCast2D" parent="RayCasts"]
+position = Vector2(32, 16)
+target_position = Vector2(1, 0)
+
+[node name="Emitters" type="Node2D" parent="."]
+
+[node name="Jump_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 32)
 emitting = false
 lifetime = 0.15
@@ -47,7 +66,7 @@ emission_shape = 1
 emission_sphere_radius = 16.0
 color = Color(1, 0.721569, 0.219608, 1)
 
-[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+[node name="Wall_Slide_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 0)
 emitting = false
 lifetime = 0.15
@@ -58,7 +77,7 @@ emission_sphere_radius = 16.0
 gravity = Vector2(0, -980)
 color = Color(1, 0.721569, 0.219608, 1)
 
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+[node name="Flight_Emitter" type="CPUParticles2D" parent="Emitters"]
 position = Vector2(16, 32)
 emitting = false
 lifetime = 0.15
@@ -68,17 +87,9 @@ emission_shape = 1
 emission_sphere_radius = 16.0
 color = Color(1, 0.721569, 0.219608, 1)
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
-position = Vector2(0, 16)
-target_position = Vector2(-1, 0)
-
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-position = Vector2(32, 16)
-target_position = Vector2(1, 0)
-
 [node name="Label" type="Label" parent="."]
 offset_top = -32.0
 offset_right = 32.0
-offset_bottom = -9.0
+offset_bottom = -6.0
 text = "0"
 horizontal_alignment = 1
