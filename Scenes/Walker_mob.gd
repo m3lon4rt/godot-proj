@@ -5,7 +5,7 @@ extends CharacterBody2D
 @export var MAX_SPEED = 40.0
 @export var ACCELERATION = 5.0
 @onready var ray_cast_2d = $RayCast2D
-@export var target = Player
+@onready var target = $%Player
 
 @export var physic_hp = 100
 @export var magic_hp = 100
