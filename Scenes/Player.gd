@@ -32,6 +32,8 @@ func _ready():
 	jump = jumps
 	wall_jump = wall_jumps
 	fuel_count = fuel
+	
+	get_node("ProgressBar").max_value = fuel
 
 # executes every physics step
 func _physics_process(delta):
@@ -94,6 +96,8 @@ func _physics_process(delta):
 
 # Function that handles flying
 func flying(_delta):
+	get_node("ProgressBar").value = fuel_count
+	
 	if Input.is_action_pressed("activate_flight") and fuel_count > 0:
 		flight_on = true
 		# Consume Fuel
