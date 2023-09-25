@@ -4,14 +4,15 @@ extends CharacterBody2D
 
 @export var MAX_SPEED = 40.0
 @export var ACCELERATION = 5.0
-@export var JUMP_VELOCITY = 300.0
+@export var JUMP_VELOCITY = 350.0
 @export var target = Player
 
 @export var physic_hp = 100
 @export var magic_hp = 100
 
 @onready var track_player_cast = $TrackPlayer
-@onready var obstacle_cast = $ObstacleCheck
+@onready var obstacle_cast = $JumpObstacleCheck
+@onready var reach_cast = $JumpReachCheck
 
 var physic_hp_count
 var magic_hp_count
@@ -75,17 +76,18 @@ func track_player():
 		
 # controls raycasts that checks whether Walker can jump over an obstacle
 func check_for_jump():
-	var direction
+	var direction = 0
 	
 	if velocity.x > 0:
 		direction = 1
 	elif velocity.x < 0:
 		direction = -1
-	else: 
-		direction = 0
-		
+
 	obstacle_cast.add_exception(target)
-	obstacle_cast.target_position = Vector2(32 * direction, 0)
+	reach_cast.add_exception(target)
 	
-	if obstacle_cast.is_colliding() and is_on_floor():
+	obstacle_cast.target_position = Vector2(velocity.x/2 + 17 * direction, 0)
+	reach_cast.target_position = Vector2(velocity.x/2 + 17 * direction, -30)
+	
+	if obstacle_cast.is_colliding() and is_on_floor() and !reach_cast.is_colliding():
 		velocity.y -= JUMP_VELOCITY

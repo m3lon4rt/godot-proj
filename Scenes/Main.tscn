@@ -13,11 +13,11 @@ wall_jumps = 10
 fuel = 400
 
 [node name="Node2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
-position = Vector2(672, 224)
+position = Vector2(489, 341)
 target = NodePath("../Player")
 
 [node name="Node2D2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_sv5ha")]
-position = Vector2(480, 352)
+position = Vector2(1055, 456)
 target = NodePath("../Player")
 
 [node name="Level" type="Node" parent="."]

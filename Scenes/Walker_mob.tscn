@@ -34,9 +34,13 @@ visible = false
 position = Vector2(16, 16)
 target_position = Vector2(0, 16)
 
-[node name="ObstacleCheck" type="RayCast2D" parent="."]
+[node name="JumpObstacleCheck" type="RayCast2D" parent="."]
 position = Vector2(16, 16)
 target_position = Vector2(44, 0)
+
+[node name="JumpReachCheck" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(44, -42)
 
 [node name="PlayerDetect" type="Label" parent="."]
 offset_left = -4.0
