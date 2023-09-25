@@ -16,8 +16,6 @@ func _process(delta):
 	# Point towards mouse
 	look_at(get_global_mouse_position())
 	
-	
-	
 	if Input.is_action_just_pressed("basic_attack"):
 		# Delay duration
 		atk_decay = 3
