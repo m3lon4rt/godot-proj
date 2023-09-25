@@ -5,10 +5,15 @@ extends CharacterBody2D
 @export var MAX_SPEED = 40.0
 @export var ACCELERATION = 5.0
 @onready var ray_cast_2d = $RayCast2D
+@export var JUMP_VELOCITY = 350.0
 @onready var target = $%Player
 
 @export var physic_hp = 100
 @export var magic_hp = 100
+
+@onready var track_player_cast = $TrackPlayer
+@onready var obstacle_cast = $JumpObstacleCheck
+@onready var reach_cast = $JumpReachCheck
 
 var physic_hp_count
 var magic_hp_count
@@ -23,27 +28,34 @@ func _ready():
 func _physics_process(delta):
 	# Debug for HP values)
 	get_node("PhysicHP").text = str(physic_hp)
-	
 	get_node("MagicHP").text = str(magic_hp)
 	
-	print("raycast direction: %d" % ray_cast_2d.target_position.x)
-	
-	print("velocity.x: %d" % velocity.x)
-	
-	print("raycast collide with obstacle? %s" % ray_cast_2d.is_colliding())
+	# Debug for player detection and tracking
+	if track_player_cast.is_colliding():
+		get_node("PlayerDetect").text = str("?")
+	else:
+		get_node("PlayerDetect").text = str("!")
 	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
-	ray_cast_2d.target_position = target.global_position - ray_cast_2d.global_position + Vector2(16,16)
+	track_player()
+	
+	check_for_jump()
+	
+	move_and_slide()
+
+func track_player():
+	track_player_cast.target_position = target.global_position - track_player_cast.global_position + Vector2(16,16)
 	# added the last bit to compensate for the player's origin being at its upper left
 	
 	# obtain player position relative to walker and move walker towards player
-	ray_cast_2d.add_exception(target)
-	var player_direction = ray_cast_2d.target_position.x
+	track_player_cast.add_exception(target)
+	var player_direction = track_player_cast.target_position.x
 	
-	if !ray_cast_2d.is_colliding():
+	# set Walker movement based on player position; stop when player is obstructed
+	if !track_player_cast.is_colliding():
 		if player_direction > 0:
 			velocity.x += ACCELERATION
 		elif player_direction < 0:
@@ -62,5 +74,21 @@ func _physics_process(delta):
 		velocity.x = -MAX_SPEED
 	elif velocity.x > MAX_SPEED:
 		velocity.x = MAX_SPEED
+		
+# controls raycasts that checks whether Walker can jump over an obstacle
+func check_for_jump():
+	var direction = 0
 	
-	move_and_slide()
+	if velocity.x > 0:
+		direction = 1
+	elif velocity.x < 0:
+		direction = -1
+
+	obstacle_cast.add_exception(target)
+	reach_cast.add_exception(target)
+	
+	obstacle_cast.target_position = Vector2(velocity.x/2 + 17 * direction, 0)
+	reach_cast.target_position = Vector2(velocity.x/2 + 17 * direction, -30)
+	
+	if obstacle_cast.is_colliding() and is_on_floor() and !reach_cast.is_colliding():
+		velocity.y -= JUMP_VELOCITY
