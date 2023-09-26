@@ -45,6 +45,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		# Screenshake when landing
 		if !on_ground:
+			get_node("Camera2D").add_trauma(1)
 			get_node("Camera2D").trauma = screen_shake
 		
 		# to check if player just landed
@@ -158,12 +159,14 @@ func wall_jumping(delta):
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle Emitter
+		get_node("Camera2D").add_trauma(1)
 		get_node("Camera2D").trauma = screen_shake
 		get_node("Emitters/Jump_Emitter").emitting = true
 	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCasts/Left_Collision").is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
-		# Screenshake and Particle emitter		
+		# Screenshake and Particle emitter
+		get_node("Camera2D").add_trauma(1)
 		get_node("Camera2D").trauma = screen_shake
 		get_node("Emitters/Jump_Emitter").emitting = true
 
