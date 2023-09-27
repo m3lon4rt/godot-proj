@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0o3sllu24a3p"]
+[gd_scene load_steps=7 format=3 uid="uid://c0o3sllu24a3p"]
 
+[ext_resource type="Script" path="res://Scenes/Walker_mob_variant.gd" id="1_14evs"]
 [ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_t02uy"]
 [ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_2c4bq"]
+[ext_resource type="Script" path="res://Scenes/WalkerVariantChaseState.gd" id="3_0tgie"]
+[ext_resource type="Script" path="res://Scenes/WalkerVariantIdleState.gd" id="4_2slji"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j54xp"]
 
 [node name="Mob_variant" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_14evs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.815686, 0.533333, 1, 1)
@@ -18,7 +24,20 @@ position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_j54xp")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_2c4bq")
+state = NodePath("Chase")
 
-[node name="Chase" type="Node" parent="StateMachine"]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
+script = ExtResource("4_2slji")
+actor = NodePath("../..")
+vision_cast = NodePath("../../Player_Track_Cast")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
+script = ExtResource("3_0tgie")
+actor = NodePath("../..")
+vision_cast = NodePath("../../Player_Track_Cast")
+
+[node name="Player_Track_Cast" type="RayCast2D" parent="."]
+visible = false
+position = Vector2(16, 16)

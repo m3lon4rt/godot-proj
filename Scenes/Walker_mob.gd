@@ -2,9 +2,8 @@ class_name Walker
 extends CharacterBody2D
 
 
-@export var MAX_SPEED = 40.0
-@export var ACCELERATION = 5.0
-@onready var ray_cast_2d = $RayCast2D
+@export var MAX_SPEED = 80.0
+@export var ACCELERATION = 10.0
 @export var JUMP_VELOCITY = 350.0
 @onready var target = $%Player
 
@@ -67,7 +66,6 @@ func track_player():
 			velocity.x += ACCELERATION
 		else:
 			velocity.x = 0
-		
 	
 	# limit horizontal speed
 	if velocity.x < -MAX_SPEED:
