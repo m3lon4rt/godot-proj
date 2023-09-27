@@ -163,7 +163,7 @@ func wall_jumping(delta):
 	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCasts/Left_Collision").is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
-		# Screenshake and Particle emitter		
+		# Screenshake and Particle emitter
 		get_node("Camera2D").trauma = screen_shake
 		get_node("Emitters/Jump_Emitter").emitting = true
 
