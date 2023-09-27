@@ -38,3 +38,5 @@ func _process(delta):
 	# Function that checks if any Entities are within the hitbox during the attack
 	if self.has_overlapping_bodies() and get_node("Basic_Atk_Hitbox").disabled == false:
 		hits += 1 * self.get_overlapping_bodies().size()
+		
+		get_parent().get_node("Camera2D").trauma = get_parent().screen_shake

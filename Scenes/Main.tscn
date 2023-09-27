@@ -13,6 +13,7 @@ position = Vector2(608, 160)
 jumps = 10
 wall_jumps = 10
 fuel = 400
+screen_shake = 0.2
 
 [node name="Node2D" parent="." instance=ExtResource("3_sv5ha")]
 position = Vector2(672, 224)
