@@ -1,7 +1,7 @@
 class_name WalkerVariant
 extends CharacterBody2D
 
-@export var max_speed = 40.0
+@export var max_speed = 80.0
 @export var acceleration = 50.0
 @export var jump_velocity = 350.0
 @export var physic_hp = 100
@@ -11,7 +11,7 @@ extends CharacterBody2D
 @onready var state_machine = $StateMachine as WalkerFiniteState
 @onready var idle_state = $StateMachine/Idle as WalkerVariantIdleState
 @onready var chase_state = $StateMachine/Chase as WalkerVariantChaseState
-
+@onready var hit_state = $StateMachine/Hit as WalkerVariantHitState
 
 var physic_hp_count
 var magic_hp_count
@@ -24,9 +24,17 @@ func _ready():
 	magic_hp_count = magic_hp
 	
 	idle_state.saw_player.connect(state_machine.change_state.bind(chase_state))
+	idle_state.hit.connect(state_machine.change_state.bind(hit_state))
 	chase_state.lost_player.connect(state_machine.change_state.bind(idle_state))
+	chase_state.hit.connect(state_machine.change_state.bind(hit_state))
+	hit_state.recovered.connect(state_machine.change_state.bind(idle_state))
+	hit_state.hit.connect(state_machine.change_state.bind(hit_state))
+	
 
 func _physics_process(delta):
+	$PHP.text = str(physic_hp_count)
+	$MHP.text = str(magic_hp_count)
+	
 	$Player_Track_Cast.target_position = target.global_position - self.global_position
 	
 	if not is_on_floor():

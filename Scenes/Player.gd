@@ -20,6 +20,9 @@ var flight_on = false
 @export var wall_jumps = 0 # num of wall jumps allowed
 @export var fuel = 0 # 1 - 100 should be fine
 @export var screen_shake = 1*0.15
+@export var camera: Camera2D
+@export var ray_left: RayCast2D
+@export var ray_right: RayCast2D
 
 # Jump and Fuel counters
 var jump
@@ -45,7 +48,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		# Screenshake when landing
 		if !on_ground:
-			get_node("Camera2D").trauma = screen_shake
+			camera.trauma = screen_shake
 		
 		# to check if player just landed
 		on_ground = true
@@ -154,17 +157,17 @@ func wall_jumping(delta):
 	wall_slide(delta)
 	
 	# Checks which direction the wall is and if you're wall sliding then does a wall jump if you move in the opposite direction
-	if is_wall_sliding and Input.is_action_just_pressed("ui_right") and wall_jump > 0 and !get_node("RayCasts/Right_Collision").is_colliding():
+	if is_wall_sliding and Input.is_action_just_pressed("ui_right") and wall_jump > 0 and !ray_right.is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle Emitter
-		get_node("Camera2D").trauma = screen_shake
+		camera.trauma = screen_shake
 		get_node("Emitters/Jump_Emitter").emitting = true
-	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !get_node("RayCasts/Left_Collision").is_colliding():
+	if is_wall_sliding and Input.is_action_just_pressed("ui_left") and wall_jump > 0 and !ray_left.is_colliding():
 		wall_jump -= 1
 		velocity.y = JUMP_VELOCITY
 		# Screenshake and Particle emitter
-		get_node("Camera2D").trauma = screen_shake
+		camera.trauma = screen_shake
 		get_node("Emitters/Jump_Emitter").emitting = true
 
 # Function that handles wall sliding
@@ -194,7 +197,7 @@ func wall_slide(delta):
 
 # Custom wall checking function bec "is_on_wall()" doesn't work in this use case
 func wall_check():
-	if get_node("RayCasts/Left_Collision").is_colliding() or get_node("RayCasts/Right_Collision").is_colliding():
+	if ray_left.is_colliding() or ray_right.is_colliding():
 		on_wall = true
 	else:
 		on_wall = false

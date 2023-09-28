@@ -6,12 +6,14 @@ extends WalkerState
 @export var vision_cast: RayCast2D
 
 signal lost_player
+signal hit
 
 func _ready():
 	set_physics_process(false)
 
 func _enter_state() -> void:
 	print("Moving")
+	actor.get_node("Player_Detect").text = "!"
 	set_physics_process(true)
 
 func _exit_state() -> void:
@@ -42,6 +44,9 @@ func _physics_process(delta):
 		actor.velocity.x = actor.max_speed
 	
 	actor.move_and_slide()
+	
+	if actor.get_node("Area2D").has_overlapping_areas():
+		hit.emit()
 	
 	if vision_cast.is_colliding():
 		lost_player.emit()

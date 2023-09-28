@@ -7,11 +7,14 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "ray_left", "ray_right")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ofwwl")
 jumps = 3
+camera = NodePath("Camera2D")
+ray_left = NodePath("RayCasts/Left_Collision")
+ray_right = NodePath("RayCasts/Right_Collision")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.992157, 0.619608, 0, 1)
@@ -26,11 +29,12 @@ shape = SubResource("CircleShape2D_psfy8")
 
 [node name="Basic_Atk" type="Area2D" parent="."]
 position = Vector2(16, 16)
-collision_layer = 2
-collision_mask = 2
+collision_layer = 6
+collision_mask = 6
 script = ExtResource("3_tc05a")
 
 [node name="Basic_Atk_Hitbox" type="CollisionPolygon2D" parent="Basic_Atk"]
+position = Vector2(-16, 0)
 polygon = PackedVector2Array(32, 0, 48, -16, 64, -32, 80, -48, 96, -40, 112, -24, 120, 0, 112, 24, 96, 40, 80, 48, 64, 32, 48, 16)
 
 [node name="Camera2D" type="Camera2D" parent="."]

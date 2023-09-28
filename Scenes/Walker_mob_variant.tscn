@@ -1,12 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0o3sllu24a3p"]
+[gd_scene load_steps=9 format=3 uid="uid://c0o3sllu24a3p"]
 
 [ext_resource type="Script" path="res://Scenes/Walker_mob_variant.gd" id="1_14evs"]
 [ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_t02uy"]
 [ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_2c4bq"]
 [ext_resource type="Script" path="res://Scenes/WalkerVariantChaseState.gd" id="3_0tgie"]
 [ext_resource type="Script" path="res://Scenes/WalkerVariantIdleState.gd" id="4_2slji"]
+[ext_resource type="Script" path="res://Scenes/WalkerVariantHitState.gd" id="6_2h1ub"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j54xp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h44ao"]
 
 [node name="Mob_variant" type="CharacterBody2D"]
 collision_layer = 3
@@ -24,6 +27,15 @@ position = Vector2(16, 16)
 scale = Vector2(1.5, 1.5)
 shape = SubResource("CircleShape2D_j54xp")
 
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 5
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(16, 16)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_h44ao")
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_2c4bq")
 state = NodePath("Chase")
@@ -38,6 +50,62 @@ script = ExtResource("3_0tgie")
 actor = NodePath("../..")
 vision_cast = NodePath("../../Player_Track_Cast")
 
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "emitter")]
+script = ExtResource("6_2h1ub")
+actor = NodePath("../..")
+emitter = NodePath("../../Hit_Emitter")
+
 [node name="Player_Track_Cast" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(16, 16)
+
+[node name="Wall_Detect_Cast" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(44, 0)
+
+[node name="JumpReachCheck" type="RayCast2D" parent="."]
+position = Vector2(16, 16)
+target_position = Vector2(44, -42)
+
+[node name="Hit_Emitter" type="CPUParticles2D" parent="."]
+position = Vector2(16, 16)
+rotation = -1.5708
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+speed_scale = 3.0
+explosiveness = 0.5
+randomness = 0.15
+emission_shape = 1
+emission_sphere_radius = 5.0
+direction = Vector2(0, 0)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 150.0
+color = Color(0.258824, 1, 1, 1)
+
+[node name="Player_Detect" type="Label" parent="."]
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = -16.0
+text = "?"
+horizontal_alignment = 1
+
+[node name="PHP" type="Label" parent="."]
+modulate = Color(1, 0, 0, 1)
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = -8.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MHP" type="Label" parent="."]
+modulate = Color(0, 0, 1, 1)
+offset_top = -32.0
+offset_right = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 2
