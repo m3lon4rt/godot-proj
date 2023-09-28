@@ -1,12 +1,12 @@
-class_name WalkerVariantIdleState
+class_name WalkerVariantHitState
 extends WalkerState
 
 @export var actor: WalkerVariant
 @export var animator: AnimatedSprite2D
-@export var vision_cast: RayCast2D
+@export var emitter: CPUParticles2D
+@export var hit_stun = 0
 
-signal saw_player
-signal hit
+signal recovered
 
 func _ready():
 	set_physics_process(false)
@@ -20,5 +20,4 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
-	if not vision_cast.is_colliding():
-		saw_player.emit()
+	recovered.emit()

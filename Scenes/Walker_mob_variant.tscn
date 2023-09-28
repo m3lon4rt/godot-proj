@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0o3sllu24a3p"]
+[gd_scene load_steps=8 format=3 uid="uid://c0o3sllu24a3p"]
 
 [ext_resource type="Script" path="res://Scenes/Walker_mob_variant.gd" id="1_14evs"]
 [ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_t02uy"]
 [ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_2c4bq"]
 [ext_resource type="Script" path="res://Scenes/WalkerVariantChaseState.gd" id="3_0tgie"]
 [ext_resource type="Script" path="res://Scenes/WalkerVariantIdleState.gd" id="4_2slji"]
+[ext_resource type="Script" path="res://Scenes/WalkerVariantHitState.gd" id="6_2h1ub"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j54xp"]
 
@@ -38,6 +39,37 @@ script = ExtResource("3_0tgie")
 actor = NodePath("../..")
 vision_cast = NodePath("../../Player_Track_Cast")
 
+[node name="Node" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor")]
+script = ExtResource("6_2h1ub")
+actor = NodePath("../..")
+hit_stun = 100
+
 [node name="Player_Track_Cast" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(16, 16)
+
+[node name="Hit_Emitter" type="CPUParticles2D" parent="."]
+
+[node name="Player_Detect" type="Label" parent="."]
+offset_top = -48.0
+offset_right = 32.0
+offset_bottom = -16.0
+text = "?"
+horizontal_alignment = 1
+
+[node name="PHP" type="Label" parent="."]
+modulate = Color(1, 0, 0, 1)
+offset_top = -40.0
+offset_right = 32.0
+offset_bottom = -8.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MHP" type="Label" parent="."]
+modulate = Color(0, 0, 1, 1)
+offset_top = -32.0
+offset_right = 32.0
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 2

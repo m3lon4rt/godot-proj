@@ -7,11 +7,14 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "ray_left", "ray_right")]
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_ofwwl")
 jumps = 3
+camera = NodePath("Camera2D")
+ray_left = NodePath("RayCasts/Left_Collision")
+ray_right = NodePath("RayCasts/Right_Collision")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.992157, 0.619608, 0, 1)
