@@ -45,5 +45,8 @@ func _physics_process(delta):
 	
 	actor.move_and_slide()
 	
+	if actor.get_node("Area2D").has_overlapping_areas():
+		hit.emit()
+	
 	if vision_cast.is_colliding():
 		lost_player.emit()
