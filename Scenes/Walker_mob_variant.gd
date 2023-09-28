@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var max_speed = 80.0
 @export var acceleration = 50.0
-@export var jump_velocity = 350.0
+@export var jump_velocity = 200.0
 @export var physic_hp = 100
 @export var magic_hp = 100
 

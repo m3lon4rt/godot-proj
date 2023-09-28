@@ -43,6 +43,8 @@ func _physics_process(delta):
 	elif actor.velocity.x > actor.max_speed:
 		actor.velocity.x = actor.max_speed
 	
+	check_for_jump()
+	
 	actor.move_and_slide()
 	
 	if actor.get_node("Area2D").has_overlapping_areas():
@@ -50,3 +52,20 @@ func _physics_process(delta):
 	
 	if vision_cast.is_colliding():
 		lost_player.emit()
+
+func check_for_jump():
+	var direction = 0
+	
+	if actor.velocity.x > 0:
+		direction = 1
+	elif actor.velocity.x < 0:
+		direction = -1
+
+	actor.get_node("Wall_Detect_Cast").add_exception(actor.target)
+	actor.get_node("Jump_Reach_Cast").add_exception(actor.target)
+	
+	actor.get_node("Wall_Detect_Cast").target_position = Vector2(actor.velocity.x/2 + 16 * direction, 0)
+	actor.get_node("Jump_Reach_Cast").target_position = Vector2(actor.velocity.x/2 + 16 * direction, -30)
+	
+	if actor.get_node("Wall_Detect_Cast").is_colliding() and actor.is_on_floor() and !actor.get_node("Jump_Reach_Cast").is_colliding():
+		actor.velocity.y -= actor.jump_velocity
