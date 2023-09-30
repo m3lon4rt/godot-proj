@@ -1,4 +1,5 @@
-class_name WalkerState
+# State superclass that all mob states inherit from
+class_name MobState
 extends Node
 
 signal state_finished

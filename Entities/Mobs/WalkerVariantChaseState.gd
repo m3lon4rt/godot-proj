@@ -1,22 +1,28 @@
 class_name WalkerVariantChaseState
-extends WalkerState
+extends MobState
 
 @export var actor: WalkerVariant
 @export var animator: AnimatedSprite2D
 @export var vision_cast: RayCast2D
 
+# Signals for state switching
 signal lost_player
 signal hit
+signal dead
 
 func _ready():
+	# Stop physics process when loaded
 	set_physics_process(false)
 
 func _enter_state() -> void:
 	print("Moving")
 	actor.get_node("Player_Detect").text = "!"
+	
+	# Enable physics process when entered
 	set_physics_process(true)
 
 func _exit_state() -> void:
+	# Stop physics process when on a different state
 	set_physics_process(false)
 
 func _physics_process(delta):
@@ -43,9 +49,15 @@ func _physics_process(delta):
 	elif actor.velocity.x > actor.max_speed:
 		actor.velocity.x = actor.max_speed
 	
+	# handles jumping over obstacles
 	check_for_jump()
 	
+	# Enable actor physics
 	actor.move_and_slide()
+	
+	# Conditions for switching states
+	if actor.magic_hp_count >= 0 || actor.physic_hp_count >= 0:
+		dead.emit()
 	
 	if actor.get_node("Area2D").has_overlapping_areas():
 		hit.emit()
@@ -53,6 +65,7 @@ func _physics_process(delta):
 	if vision_cast.is_colliding():
 		lost_player.emit()
 
+# Function that checks for obstacles and makes the mob jump
 func check_for_jump():
 	var direction = 0
 	
@@ -60,12 +73,15 @@ func check_for_jump():
 		direction = 1
 	elif actor.velocity.x < 0:
 		direction = -1
-
+	
+	# Exclude the player as an "obstacle"
 	actor.get_node("Wall_Detect_Cast").add_exception(actor.target)
 	actor.get_node("Jump_Reach_Cast").add_exception(actor.target)
 	
+	# Points the raycasts to where the mob is going
 	actor.get_node("Wall_Detect_Cast").target_position = Vector2(actor.velocity.x/2 + 16 * direction, 0)
 	actor.get_node("Jump_Reach_Cast").target_position = Vector2(actor.velocity.x/2 + 16 * direction, -30)
 	
+	# jump if there's a wall and if it's not too high
 	if actor.get_node("Wall_Detect_Cast").is_colliding() and actor.is_on_floor() and !actor.get_node("Jump_Reach_Cast").is_colliding():
 		actor.velocity.y -= actor.jump_velocity

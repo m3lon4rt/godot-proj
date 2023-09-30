@@ -1,5 +1,5 @@
 class_name WalkerStillState
-extends WalkerState
+extends MobState
 
 @export var actor: Walker
 
