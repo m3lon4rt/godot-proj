@@ -20,5 +20,8 @@ func _exit_state() -> void:
 	set_physics_process(false)
 
 func _physics_process(delta):
+	if actor.get_node("Area2D").has_overlapping_areas():
+		hit.emit()
+	
 	if not vision_cast.is_colliding():
 		saw_player.emit()

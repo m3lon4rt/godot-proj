@@ -1,16 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://boyq21qdyfnda"]
 
-[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_ndptr"]
-[ext_resource type="Script" path="res://Scenes/Player.gd" id="1_ofwwl"]
-[ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="3_dwfug"]
-[ext_resource type="Script" path="res://Scenes/Basic_Atk.gd" id="3_tc05a"]
+[ext_resource type="Script" path="res://Entities/Player/Player.gd" id="1_yc2fk"]
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://Assets/icon.svg" id="2_p4uym"]
+[ext_resource type="Script" path="res://Entities/Player/Basic_Atk.gd" id="3_qy073"]
+[ext_resource type="Script" path="res://Entities/Player/Camera2D.gd" id="4_iuq85"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_psfy8"]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("camera", "ray_left", "ray_right")]
-collision_layer = 3
-collision_mask = 3
-script = ExtResource("1_ofwwl")
+script = ExtResource("1_yc2fk")
 jumps = 3
 camera = NodePath("Camera2D")
 ray_left = NodePath("RayCasts/Left_Collision")
@@ -20,7 +18,7 @@ ray_right = NodePath("RayCasts/Right_Collision")
 modulate = Color(0.992157, 0.619608, 0, 1)
 position = Vector2(16, 16)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ndptr")
+texture = ExtResource("2_p4uym")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
@@ -31,7 +29,7 @@ shape = SubResource("CircleShape2D_psfy8")
 position = Vector2(16, 16)
 collision_layer = 6
 collision_mask = 6
-script = ExtResource("3_tc05a")
+script = ExtResource("3_qy073")
 
 [node name="Basic_Atk_Hitbox" type="CollisionPolygon2D" parent="Basic_Atk"]
 position = Vector2(-16, 0)
@@ -44,11 +42,11 @@ zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
-script = ExtResource("3_dwfug")
+script = ExtResource("4_iuq85")
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
 scale = Vector2(0.05, 0.05)
-texture = ExtResource("1_ndptr")
+texture = ExtResource("2_p4uym")
 
 [node name="RayCasts" type="Node2D" parent="."]
 

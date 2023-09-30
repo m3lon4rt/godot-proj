@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://btopkj2t82iuc"]
 
-[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_3whie"]
-[ext_resource type="Script" path="res://Scenes/Walker_mob.gd" id="1_deteq"]
-[ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_eibac"]
-[ext_resource type="Script" path="res://Scenes/WalkerStillState.gd" id="4_npkv2"]
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://Assets/icon.svg" id="1_3whie"]
+[ext_resource type="Script" path="res://Entities/Mobs/Walker_mob.gd" id="1_deteq"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerFiniteState.gd" id="2_eibac"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerStillState.gd" id="4_npkv2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_44w8v"]
 
