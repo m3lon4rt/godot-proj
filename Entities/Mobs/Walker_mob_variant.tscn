@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://c0o3sllu24a3p"]
 
-[ext_resource type="Script" path="res://Scenes/Walker_mob_variant.gd" id="1_14evs"]
-[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_t02uy"]
-[ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_2c4bq"]
-[ext_resource type="Script" path="res://Scenes/WalkerVariantChaseState.gd" id="3_0tgie"]
-[ext_resource type="Script" path="res://Scenes/WalkerVariantIdleState.gd" id="4_2slji"]
-[ext_resource type="Script" path="res://Scenes/WalkerVariantHitState.gd" id="6_2h1ub"]
+[ext_resource type="Script" path="res://Entities/Mobs/Walker_mob_variant.gd" id="1_4jsif"]
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://Assets/icon.svg" id="2_56v22"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerFiniteState.gd" id="3_ysila"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerVariantIdleState.gd" id="4_g6chd"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerVariantChaseState.gd" id="5_j7v10"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerVariantHitState.gd" id="6_t8srx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j54xp"]
 
@@ -14,13 +14,13 @@
 [node name="Mob_variant" type="CharacterBody2D"]
 collision_layer = 3
 collision_mask = 3
-script = ExtResource("1_14evs")
+script = ExtResource("1_4jsif")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.815686, 0.533333, 1, 1)
 position = Vector2(16, 16)
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_t02uy")
+texture = ExtResource("2_56v22")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
@@ -38,21 +38,21 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_h44ao")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("state")]
-script = ExtResource("2_2c4bq")
+script = ExtResource("3_ysila")
 state = NodePath("Chase")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
-script = ExtResource("4_2slji")
+script = ExtResource("4_g6chd")
 actor = NodePath("../..")
 vision_cast = NodePath("../../Player_Track_Cast")
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "vision_cast")]
-script = ExtResource("3_0tgie")
+script = ExtResource("5_j7v10")
 actor = NodePath("../..")
 vision_cast = NodePath("../../Player_Track_Cast")
 
 [node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor", "emitter")]
-script = ExtResource("6_2h1ub")
+script = ExtResource("6_t8srx")
 actor = NodePath("../..")
 emitter = NodePath("../../Hit_Emitter")
 
