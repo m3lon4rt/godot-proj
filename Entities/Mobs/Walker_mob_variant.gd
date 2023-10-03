@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var physic_hp = 100
 @export var magic_hp = 100
 
-@onready var target = $%Player
+@onready var target = get_parent().get_node('Player')
 @onready var state_machine = $StateMachine as MobFiniteState
 @onready var idle_state = $StateMachine/Idle as WalkerVariantIdleState
 @onready var chase_state = $StateMachine/Chase as WalkerVariantChaseState
