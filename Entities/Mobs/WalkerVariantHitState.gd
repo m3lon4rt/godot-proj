@@ -6,11 +6,12 @@ extends MobState
 @export var emitter: CPUParticles2D
 @export var hit_stun = 50
 
-var hit_stun_counter = hit_stun
+var hit_stun_counter
 
 # Signals for state switching
 signal recovered
 signal hit
+signal dead
 
 func _ready():
 	hit_stun_counter = hit_stun
@@ -41,6 +42,9 @@ func _physics_process(delta):
 		hit_stun_counter -= 1
 	
 	# Conditions for switching states
+	if actor.magic_hp_count <= 0 || actor.physic_hp_count <= 0:
+		dead.emit()
+	
 	if actor.get_node("Area2D").has_overlapping_areas() and hit_stun_counter <= hit_stun-5:
 		hit.emit()
 	

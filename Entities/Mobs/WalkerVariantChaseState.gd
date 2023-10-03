@@ -56,7 +56,7 @@ func _physics_process(delta):
 	actor.move_and_slide()
 	
 	# Conditions for switching states
-	if actor.magic_hp_count >= 0 || actor.physic_hp_count >= 0:
+	if actor.magic_hp_count <= 0 || actor.physic_hp_count <= 0:
 		dead.emit()
 	
 	if actor.get_node("Area2D").has_overlapping_areas():
