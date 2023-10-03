@@ -57,8 +57,9 @@ script = ExtResource("6_t8srx")
 actor = NodePath("../..")
 emitter = NodePath("../../Hit_Emitter")
 
-[node name="Death" type="Node" parent="StateMachine"]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("actor")]
 script = ExtResource("7_30fuh")
+actor = NodePath("../..")
 
 [node name="Player_Track_Cast" type="RayCast2D" parent="."]
 visible = false

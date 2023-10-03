@@ -8,6 +8,7 @@ extends MobState
 # Signals for state switching
 signal saw_player
 signal hit
+signal dead
 
 func _ready():
 	# Stop physics process when loaded
@@ -26,6 +27,9 @@ func _exit_state() -> void:
 
 func _physics_process(delta):
 	# Conditions for switching states
+	if actor.magic_hp_count <= 0 || actor.physic_hp_count <= 0:
+		dead.emit()
+	
 	if actor.get_node("Area2D").has_overlapping_areas():
 		hit.emit()
 	
