@@ -1,13 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://btopkj2t82iuc"]
 
-[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://icon.svg" id="1_3whie"]
-[ext_resource type="Script" path="res://Scenes/Walker_mob.gd" id="1_deteq"]
-[ext_resource type="Script" path="res://Scenes/WalkerFiniteState.gd" id="2_eibac"]
-[ext_resource type="Script" path="res://Scenes/WalkerStillState.gd" id="4_npkv2"]
+[ext_resource type="Texture2D" uid="uid://bd2a16u7bvkvh" path="res://Assets/icon.svg" id="1_3whie"]
+[ext_resource type="Script" path="res://Entities/Mobs/Walker_mob.gd" id="1_deteq"]
+[ext_resource type="Script" path="res://Entities/Mobs/MobFiniteState.gd" id="2_eibac"]
+[ext_resource type="Script" path="res://Entities/Mobs/WalkerStillState.gd" id="4_npkv2"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d7nlq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_44w8v"]
 
 [node name="Node2D" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_deteq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -17,10 +19,9 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_3whie")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(16, 16)
-scale = Vector2(1.6, 1.6)
-shape = SubResource("RectangleShape2D_d7nlq")
+scale = Vector2(1.5, 1.5)
+shape = SubResource("CircleShape2D_44w8v")
 
 [node name="WalkerFiniteState" type="Node" parent="." node_paths=PackedStringArray("state")]
 script = ExtResource("2_eibac")

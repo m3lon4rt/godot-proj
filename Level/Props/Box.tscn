@@ -1,16 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0obpdqm8orxy"]
 
-[ext_resource type="Texture2D" uid="uid://dfva0bjk1hat3" path="res://wall.png" id="1_daa1q"]
+[ext_resource type="Texture2D" uid="uid://dfva0bjk1hat3" path="res://Assets/wall.png" id="1_kenci"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tykid"]
 
 [node name="Node2D" type="StaticBody2D"]
-collision_layer = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 position = Vector2(16, 16)
-texture = ExtResource("1_daa1q")
+texture = ExtResource("1_kenci")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, 16)
